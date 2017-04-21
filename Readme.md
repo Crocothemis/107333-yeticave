@@ -1,7 +1,7 @@
 # Личный проект «YetiCave» 
 
 * Студент: [Татьяна Лебедева](https://up.htmlacademy.ru/php/1/user/107333).
-* Наставник: `Неизвестно`.
+* Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
 ---
 
