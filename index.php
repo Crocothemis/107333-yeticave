@@ -108,12 +108,7 @@ $lots = [["title" => "2014 Rossignol District Snowboard", "category" =>"Доск
         <ul class="lots__list">
 
             <?php
-            $lots_index = 0;
-            $num = count($lots);
-
-            while ($lots_index < $num) {
-                $lots_item = $lots[$lots_index];
-                $lots_index++;
+           foreach ($lots as $key => $lots_item):
             ?>
 
             <li class="lots__item lot">
@@ -135,7 +130,7 @@ $lots = [["title" => "2014 Rossignol District Snowboard", "category" =>"Доск
                 </div>
             </li>
             <?php
-            }
+            endforeach
             ?>
 
         </ul>
