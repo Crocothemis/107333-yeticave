@@ -7,6 +7,32 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
+
+function timestamp_to_time($ts) {
+    $now = time();
+    $hour_ago = $now - 60 * 60;
+    $day_ago = $now - (24 * 60 * 60);
+
+    if ($ts < $day_ago) {
+
+        return date('d.m.y'.' в '. 'H:i:s', $ts);
+
+    } else {
+
+        if ($ts < $hour_ago) {
+
+            return date('G'.' часов назад', $ts);
+
+        } else {
+
+            return date('i'.' минут назад', $ts);
+
+        }
+
+    }
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -109,13 +135,20 @@ $bets = [
                 </div>
                 <div class="history">
                     <h3>История ставок (<span>4</span>)</h3>
+
                     <!-- заполните эту таблицу данными из массива $bets-->
                     <table class="history__list">
+                        <?php
+                        foreach ($bets as $key => $bet):
+                        ?>
                         <tr class="history__item">
-                            <td class="history__name"><!-- имя автора--></td>
-                            <td class="history__price"><!-- цена--> р</td>
-                            <td class="history__time"><!-- дата в человеческом формате--></td>
+                            <td class="history__name"><?= ($bet["name"]);?></td>
+                            <td class="history__price"><?= ($bet["price"]);?></td>
+                            <td class="history__time"><?= timestamp_to_time(($bet["ts"]));?></td>
                         </tr>
+                        <?php
+                        endforeach;
+                        ?>
                     </table>
                 </div>
             </div>

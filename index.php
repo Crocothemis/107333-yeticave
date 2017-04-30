@@ -108,7 +108,7 @@ $lots = [["title" => "2014 Rossignol District Snowboard", "category" =>"Доск
         <ul class="lots__list">
 
             <?php
-           foreach ($lots as $key => $lots_item):
+            foreach ($lots as $key => $lots_item):
             ?>
 
             <li class="lots__item lot">
@@ -130,7 +130,7 @@ $lots = [["title" => "2014 Rossignol District Snowboard", "category" =>"Доск
                 </div>
             </li>
             <?php
-            endforeach
+            endforeach;
             ?>
 
         </ul>
