@@ -1,5 +1,7 @@
 <?php
+
 require_once 'functions.php';
+require_once 'lots.php';
 // ставки пользователей, которыми надо заполнить таблицу
 $bets = [
     ['name' => 'Иван', 'price' => 11500, 'ts' => strtotime('-' . rand(1, 50) .' minute')],
@@ -47,7 +49,7 @@ function timestamp_to_time($ts) {
 
 <?= include_templates("templates/header.php", []) ?>
 
-<?php include_templates("templates/lot.php", ['bets' => $bets]);
+<?php include_templates("templates/lot.php", ['bets' => $bets, 'lots' => $lots]);
 ?>
 
 <?= include_templates("templates/footer.php", []) ?>
