@@ -1,13 +1,21 @@
+<?php
+if (!array_key_exists($_GET['id'], $lots)) {
+    header("HTTP/1.1 404 Not Found");
+    exit();
+}
+
+ ?>
+
 <main>
     <?= include_templates("templates/nav.php", []) ?>
     <section class="lot-item container">
-        <h2>DC Ply Mens 2016/2017 Snowboard</h2>
+        <h2> <?php print($lots[$_GET['id']]["title"]);?></h2>
         <div class="lot-item__content">
             <div class="lot-item__left">
                 <div class="lot-item__image">
-                    <img src="img/lot-image.jpg" width="730" height="548" alt="Сноуборд">
+                    <img src="<?php print($lots[$_GET['id']]["image"]);?>" width="730" height="548" alt="Сноуборд">
                 </div>
-                <p class="lot-item__category">Категория: <span>Доски и лыжи</span></p>
+                <p class="lot-item__category">Категория: <span> <?= ($lots[$_GET['id']]["category"]);?></span></p>
                 <p class="lot-item__description">Легкий маневренный сноуборд, готовый дать жару в любом парке, растопив
                     снег
                     мощным щелчкоми четкими дугами. Стекловолокно Bi-Ax, уложенное в двух направлениях, наделяет этот
@@ -27,7 +35,7 @@
                     <div class="lot-item__cost-state">
                         <div class="lot-item__rate">
                             <span class="lot-item__amount">Текущая цена</span>
-                            <span class="lot-item__cost">11 500</span>
+                            <span class="lot-item__cost"><?= ($lots[$_GET['id']]["price"]);?></span>
                         </div>
                         <div class="lot-item__min-cost">
                             Мин. ставка <span>12 000 р</span>
@@ -44,7 +52,6 @@
                 <div class="history">
                     <h3>История ставок (<span>4</span>)</h3>
 
-                    <!-- заполните эту таблицу данными из массива $bets-->
                     <table class="history__list">
                         <?php
                         foreach ($bets as $key => $bet):
