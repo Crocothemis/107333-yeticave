@@ -1,21 +1,16 @@
-<?php
-if (!array_key_exists($_GET['id'], $lots)) {
-    header("HTTP/1.1 404 Not Found");
-    exit();
-}
 
- ?>
+
 
 <main>
     <?= include_templates("templates/nav.php", []) ?>
     <section class="lot-item container">
-        <h2> <?php print($lots[$_GET['id']]["title"]);?></h2>
+        <h2> <?php print($lot["title"]);?></h2>
         <div class="lot-item__content">
             <div class="lot-item__left">
                 <div class="lot-item__image">
-                    <img src="<?php print($lots[$_GET['id']]["image"]);?>" width="730" height="548" alt="Сноуборд">
+                    <img src="<?php print($lot["image"]);?>" width="730" height="548" alt="Сноуборд">
                 </div>
-                <p class="lot-item__category">Категория: <span> <?= ($lots[$_GET['id']]["category"]);?></span></p>
+                <p class="lot-item__category">Категория: <span> <?= ($lot["category"]);?></span></p>
                 <p class="lot-item__description">Легкий маневренный сноуборд, готовый дать жару в любом парке, растопив
                     снег
                     мощным щелчкоми четкими дугами. Стекловолокно Bi-Ax, уложенное в двух направлениях, наделяет этот
@@ -35,10 +30,10 @@ if (!array_key_exists($_GET['id'], $lots)) {
                     <div class="lot-item__cost-state">
                         <div class="lot-item__rate">
                             <span class="lot-item__amount">Текущая цена</span>
-                            <span class="lot-item__cost"><?= ($lots[$_GET['id']]["price"]);?></span>
+                            <span class="lot-item__cost"><?= ($lot["price"]);?></span>
                         </div>
                         <div class="lot-item__min-cost">
-                            Мин. ставка <span>12 000 р</span>
+                            Мин. ставка <span><?= ($lot["price"]);?></span>
                         </div>
                     </div>
                     <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post">
@@ -50,19 +45,22 @@ if (!array_key_exists($_GET['id'], $lots)) {
                     </form>
                 </div>
                 <div class="history">
-                    <h3>История ставок (<span>4</span>)</h3>
+                    <h3>История ставок (<span><?= isset($bets)? count($bets) : "0"; ?></span>)</h3>
 
                     <table class="history__list">
                         <?php
-                        foreach ($bets as $key => $bet):
-                            ?>
-                            <tr class="history__item">
-                                <td class="history__name"><?= ($bet["name"]);?></td>
-                                <td class="history__price"><?= ($bet["price"]);?></td>
-                                <td class="history__time"><?= timestamp_to_time(($bet["ts"]));?></td>
-                            </tr>
-                            <?php
-                        endforeach;
+
+                        if (isset($bets)) {
+                            foreach ($bets as $key => $bet):
+                                ?>
+                                <tr class="history__item">
+                                    <td class="history__name"><?= ($bet["name"]);?></td>
+                                    <td class="history__price"><?= ($bet["price"]);?></td>
+                                    <td class="history__time"><?= timestamp_to_time(($bet["ts"]));?></td>
+                                </tr>
+                                <?php
+                            endforeach;
+                        }
                         ?>
                     </table>
                 </div>

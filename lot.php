@@ -49,7 +49,24 @@ function timestamp_to_time($ts) {
 
 <?= include_templates("templates/header.php", []) ?>
 
-<?php include_templates("templates/lot.php", ['bets' => $bets, 'lots' => $lots]);
+
+
+<?php
+if (!array_key_exists($_GET['id'], $lots)) {
+    header("HTTP/1.1 404 Not Found");
+    ?>
+    <main>
+        <?= include_templates("templates/nav.php", []) ?>
+        <section class="lot-item container">
+            <h2>Такого лота не существует</h2>
+            <p>Перейдите на <a href="/">главную страницу</a> для просмотра всех товаров</p>
+        </section>
+
+    </main>
+
+    <?php
+    exit();
+} else include_templates("templates/lot.php", ['bets' => $bets, 'lot' => $lots[$_GET['id']]]);
 ?>
 
 <?= include_templates("templates/footer.php", []) ?>
