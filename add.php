@@ -15,74 +15,90 @@ require_once 'functions.php';
 <?= include_templates("templates/header.php", []) ?>
 
 <?php
+ if (isset($_SESSION['user'])) {
 
-$invalid_fields = [];
-$valid_fields = [];
+     $invalid_fields = [];
+     $valid_fields = [];
 
-if (isset($_POST['submit-btn'])) { //если форма была отправлена
+     if (isset($_POST['submit-btn'])) { //если форма была отправлена
 
-    foreach ($_POST as $key => $value) {
+         foreach ($_POST as $key => $value) {
 
-        if ($key !== 'image') {
+             if ($key !== 'image') {
 
-            $valid_fields[$key] = htmlspecialchars($value);
+                 $valid_fields[$key] = htmlspecialchars($value);
 
-            if (($key === 'title' || $key ===  'message') && empty($value)) {
+                 if (($key === 'title' || $key ===  'message') && empty($value)) {
 
-                $invalid_fields[$key] = "поле должно быть заполнено";
-
-
-            } else if (($key === 'price' || $key ===  'lot-step') && !is_numeric($value)) {
-
-                $invalid_fields[$key] = 'допускаются только цифры';
-
-            } else if (($key === 'lot-date') && !is_numeric(strtotime($value))) {
-
-                $invalid_fields[$key] = 'введите дату';
+                     $invalid_fields[$key] = "поле должно быть заполнено";
 
 
-            }  else if(($key === 'category') && ($value === "Выберите категорию")) {
+                 } else if (($key === 'price' || $key ===  'lot-step') && !is_numeric($value)) {
 
-                $invalid_fields[$key] = 'категория должна быть выбрана';
+                     $invalid_fields[$key] = 'допускаются только цифры';
 
-            }
-        }
+                 } else if (($key === 'lot-date') && !is_numeric(strtotime($value))) {
 
-        if (isset($_FILES['image'])) {
+                     $invalid_fields[$key] = 'введите дату';
 
-            $img_type = $_FILES['image']['type'];
 
-            if (($img_type == 'image/jpeg') || ($img_type == 'image/png') || ($img_type == 'image/gif') ) {
+                 }  else if(($key === 'category') && ($value === "Выберите категорию")) {
 
-                $valid_fields['image'] = 'img/'  .  $_FILES['image']['name'];
-                move_uploaded_file( $_FILES['image']['tmp_name'], 'img/' . basename($_FILES['image']['name']));
+                     $invalid_fields[$key] = 'категория должна быть выбрана';
 
-            } else {
-                $invalid_fields['image'] = 'допускаются форматы png, jpg, gif';
-                $form_valid = false;
-            }
+                 }
+             }
 
-        } else {
-            $invalid_fields['image'] = 'добавьте изображение';
+             if (isset($_FILES['image'])) {
 
-        }
+                 $img_type = $_FILES['image']['type'];
 
-    }
+                 if (($img_type == 'image/jpeg') || ($img_type == 'image/png') || ($img_type == 'image/gif') ) {
 
-    if (!empty($invalid_fields)) { //если форма невалидна
+                     $valid_fields['image'] = 'img/'  .  $_FILES['image']['name'];
+                     move_uploaded_file( $_FILES['image']['tmp_name'], 'img/' . basename($_FILES['image']['name']));
 
-        echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+                 } else {
+                     $invalid_fields['image'] = 'допускаются форматы png, jpg, gif';
+                     $form_valid = false;
+                 }
 
-    } else { //показать страницу с новыми данными
+             } else {
+                 $invalid_fields['image'] = 'добавьте изображение';
 
-        echo  include_templates("templates/lot.php", ['lot' => $valid_fields]);
-    }
+             }
 
-} else { // если это первая загрузка страницы
+         }
 
-    echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+         if (!empty($invalid_fields)) { //если форма невалидна
 
-}
+             echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+
+         } else { //показать страницу с новыми данными
+
+             echo  include_templates("templates/lot.php", ['lot' => $valid_fields]);
+         }
+
+     } else { // если это первая загрузка страницы
+
+         echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+
+     }
+ } else {
+     header( 'http/1.1 403 forbidden' );
+     ?>
+     <main>
+         <?= include_templates("templates/nav.php", []) ?>
+         <section class="lot-item container">
+             <h2>Доступ ограничен</h2>
+             <p>Выполните <a href="/login.php">вход</a> или <a href="/sign-up.php">зарегистрируйтесь</a> для просмотра этой страницы</p>
+         </section>
+
+     </main>
+
+     <?php
+     exit();
+ }
 
 ?>
 
