@@ -33,4 +33,29 @@ function xss($data)
     return htmlspecialchars($data);
 }
 
+
+function timestamp_to_time($ts) {
+    $now = time();
+    $hour_ago = $now - 60 * 60;
+    $day_ago = $now - (24 * 60 * 60);
+
+    if ($ts < $day_ago) {
+
+        return date('d.m.y'.' в '. 'H:i:s', $ts);
+
+    } else {
+
+        if ($ts < $hour_ago) {
+
+            return date('G'.' часов назад', $ts);
+
+        } else {
+
+            return date('i'.' минут назад', $ts);
+
+        }
+
+    }
+
+}
 ?>

@@ -10,30 +10,29 @@ $bets = [
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
 
-function timestamp_to_time($ts) {
-    $now = time();
-    $hour_ago = $now - 60 * 60;
-    $day_ago = $now - (24 * 60 * 60);
 
-    if ($ts < $day_ago) {
+$main_cookie = "lot-" . $_GET["id"];
+if (!isset($_COOKIE[$main_cookie]))
+{
 
-        return date('d.m.y'.' в '. 'H:i:s', $ts);
+    if (isset($_POST['add-cost'])) { //если форма была отправлена
 
-    } else {
+// ДОБАВИТЬ КУКИ
+        setcookie("cost-" . $_GET["id"],  $_POST["cost"]);
+        setcookie("time-" . $_GET["id"],  time());
+        setcookie( $main_cookie,  $_GET["id"]);
+//    сумму;
+//    дату и время; time()
+//идентификатор лота (индекс из массива лотов).
 
-        if ($ts < $hour_ago) {
-
-            return date('G'.' часов назад', $ts);
-
-        } else {
-
-            return date('i'.' минут назад', $ts);
-
-        }
-
+// ПЕРЕНАПРАВИТЬ НА MYLOTS
+ header("Location: /mylots.php");
     }
-
 }
+
+
+
+
 
 ?>
 
