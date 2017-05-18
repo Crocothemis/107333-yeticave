@@ -25,31 +25,34 @@
         <h2>Мои ставки</h2>
         <table class="rates__list">
 
-
             <?php
 
-                foreach ($lots as $key => $lots_item) {
-                    if (isset($_COOKIE["lot-" . $key])) {
+            foreach (get_my_lots() as $key => $lot_cookie) {
+                foreach ($lot_cookie as $key_cookie => $cookie_item) {
+
+                    $id = $cookie_item["id"];
+
                     ?>
 
                     <tr class="rates__item">
                         <td class="rates__info">
                             <div class="rates__img">
-                                <img src="<?php print($lots_item["image"]);?>" width="54" height="40" alt="Сноуборд">
+                                <img src="<?php print($lots[$key_cookie]["image"]); ?>" width="54" height="40" alt="Сноуборд">
                             </div>
-                            <h3 class="rates__title"><a href="/lot.php?id=<?php print($key);?>">2014 Rossignol District Snowboard</a></h3>
+                            <h3 class="rates__title"><a href="/lot.php?id=<?php print $id; ?>">2014 Rossignol District
+                                    Snowboard</a></h3>
                         </td>
                         <td class="rates__category">
-                            <?= ($lots_item["category"]);?>
+                            <?php print ($lots[$key_cookie]["category"]); ?>
                         </td>
                         <td class="rates__timer">
                             <div class="timer timer--finishing">07:13:34</div>
                         </td>
                         <td class="rates__price">
-                            <?php print ($_COOKIE["cost-" . $key])?>
+                            <?php print ($cookie_item["cost"]) ?>
                         </td>
                         <td class="rates__time">
-                            <?= timestamp_to_time($_COOKIE["time-" . $key]);?>
+                            <?= timestamp_to_time($cookie_item["time"]); ?>
                         </td>
                     </tr>
                     <?php

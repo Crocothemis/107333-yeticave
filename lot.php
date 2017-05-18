@@ -11,28 +11,26 @@ $bets = [
 ];
 
 
-$main_cookie = "lot-" . $_GET["id"];
-if (!isset($_COOKIE[$main_cookie]))
-{
+$lot_id = $_GET["id"];
+$my_lots = array();
 
-    if (isset($_POST['add-cost'])) { //если форма была отправлена
+if (isset($_POST['add-cost']) && !(array_key_exists ( $lot_id , get_my_lots() ))) {
+    
+    $arr = [ $lot_id => ["cost" => $_POST["cost"],"time" => time(), "id" => $lot_id]];
 
-// ДОБАВИТЬ КУКИ
-        setcookie("cost-" . $_GET["id"],  $_POST["cost"]);
-        setcookie("time-" . $_GET["id"],  time());
-        setcookie( $main_cookie,  $_GET["id"]);
-//    сумму;
-//    дату и время; time()
-//идентификатор лота (индекс из массива лотов).
+    if (!empty(get_my_lots()))  {
+        foreach (get_my_lots() as $key => $lot_cookie) {
 
-// ПЕРЕНАПРАВИТЬ НА MYLOTS
- header("Location: /mylots.php");
+            array_push($my_lots, $lot_cookie);
+        }
     }
+
+    array_push($my_lots, $arr);
+
+    setcookie( "mylots",json_encode($my_lots));
+
+    header("Location: /mylots.php");
 }
-
-
-
-
 
 ?>
 
@@ -48,10 +46,9 @@ if (!isset($_COOKIE[$main_cookie]))
 
 <?= include_templates("templates/header.php", []) ?>
 
-
-
 <?php
-if (!array_key_exists($_GET['id'], $lots)) {
+
+if (!array_key_exists($_GET["id"], $lots)) {
     header("HTTP/1.1 404 Not Found");
     ?>
     <main>
@@ -65,7 +62,7 @@ if (!array_key_exists($_GET['id'], $lots)) {
 
     <?php
     exit();
-} else include_templates("templates/lot.php", ['bets' => $bets, 'lot' => $lots[$_GET['id']]]);
+} else include_templates("templates/lot.php", ["bets" => $bets, "lot" => $lots[$_GET["id"]], "lot_id" => $lot_id]);
 ?>
 
 <?= include_templates("templates/footer.php", []) ?>

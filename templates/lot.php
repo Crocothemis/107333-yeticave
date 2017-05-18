@@ -36,7 +36,16 @@
                         </div>
 
                         <?php
-                        if (!isset($_COOKIE["lot-" . $_GET['id']])) {
+
+                        $all_costs = array();
+
+                        foreach (get_my_lots() as $key => $lot_cookie) {
+                            foreach ($lot_cookie as $key_cookie => $cookie_item){
+                                array_push($all_costs, $key_cookie);
+                            }
+                        }
+
+                        if (!(in_array ($lot_id , $all_costs))) {
                         ?>
                         <form class="lot-item__form" action="" method="post">
                             <p class="lot-item__form-item">
@@ -46,7 +55,8 @@
                             <button type="submit"  name="add-cost" class="button">Сделать ставку</button>
                         </form>
 
-                        <?php }
+                        <?php
+                        }
                         ?>
                     </div>
                 <?php endif; ?>

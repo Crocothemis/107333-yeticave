@@ -41,21 +41,35 @@ function timestamp_to_time($ts) {
 
     if ($ts < $day_ago) {
 
-        return date('d.m.y'.' в '. 'H:i:s', $ts);
+        return date("d.m.y"." в ". "H:i:s", $ts);
 
     } else {
 
         if ($ts < $hour_ago) {
 
-            return date('G'.' часов назад', $ts);
+            return date("G"." часов назад", $ts);
 
         } else {
 
-            return date('i'.' минут назад', $ts);
+            return date("i"." минут назад", $ts);
 
         }
 
     }
 
 }
+
+function get_my_lots() {
+
+    $cookie_arr = [];
+
+
+    if (isset($_COOKIE["mylots"])) {
+
+        $cookie_arr = json_decode($_COOKIE["mylots"], true);
+
+    }
+    return $cookie_arr;
+}
+
 ?>
