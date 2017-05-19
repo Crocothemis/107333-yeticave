@@ -10,29 +10,26 @@ $bets = [
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
 
-function timestamp_to_time($ts) {
-    $now = time();
-    $hour_ago = $now - 60 * 60;
-    $day_ago = $now - (24 * 60 * 60);
 
-    if ($ts < $day_ago) {
+$lot_id = $_GET["id"];
+$my_lots = array();
 
-        return date('d.m.y'.' в '. 'H:i:s', $ts);
+if (isset($_POST['add-cost']) && !(array_key_exists ( $lot_id , get_my_lots() ))) {
+    
+    $arr = [ $lot_id => ["cost" => $_POST["cost"],"time" => time(), "id" => $lot_id]];
 
-    } else {
+    if (!empty(get_my_lots()))  {
+        foreach (get_my_lots() as $key => $lot_cookie) {
 
-        if ($ts < $hour_ago) {
-
-            return date('G'.' часов назад', $ts);
-
-        } else {
-
-            return date('i'.' минут назад', $ts);
-
+            array_push($my_lots, $lot_cookie);
         }
-
     }
 
+    array_push($my_lots, $arr);
+
+    setcookie( "mylots",json_encode($my_lots));
+
+    header("Location: /mylots.php");
 }
 
 ?>
@@ -49,10 +46,9 @@ function timestamp_to_time($ts) {
 
 <?= include_templates("templates/header.php", []) ?>
 
-
-
 <?php
-if (!array_key_exists($_GET['id'], $lots)) {
+
+if (!array_key_exists($_GET["id"], $lots)) {
     header("HTTP/1.1 404 Not Found");
     ?>
     <main>
@@ -66,7 +62,7 @@ if (!array_key_exists($_GET['id'], $lots)) {
 
     <?php
     exit();
-} else include_templates("templates/lot.php", ['bets' => $bets, 'lot' => $lots[$_GET['id']]]);
+} else include_templates("templates/lot.php", ["bets" => $bets, "lot" => $lots[$_GET["id"]], "lot_id" => $lot_id]);
 ?>
 
 <?= include_templates("templates/footer.php", []) ?>

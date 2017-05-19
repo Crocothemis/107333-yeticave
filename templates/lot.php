@@ -34,13 +34,30 @@
                                 Мин. ставка <span><?= ($lot["price"]);?></span>
                             </div>
                         </div>
-                        <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post">
+
+                        <?php
+
+                        $all_costs = array();
+
+                        foreach (get_my_lots() as $key => $lot_cookie) {
+                            foreach ($lot_cookie as $key_cookie => $cookie_item){
+                                array_push($all_costs, $key_cookie);
+                            }
+                        }
+
+                        if (!(in_array ($lot_id , $all_costs))) {
+                        ?>
+                        <form class="lot-item__form" action="" method="post">
                             <p class="lot-item__form-item">
                                 <label for="cost">Ваша ставка</label>
                                 <input id="cost" type="number" name="cost" placeholder="12 000">
                             </p>
-                            <button type="submit" class="button">Сделать ставку</button>
+                            <button type="submit"  name="add-cost" class="button">Сделать ставку</button>
                         </form>
+
+                        <?php
+                        }
+                        ?>
                     </div>
                 <?php endif; ?>
                 <div class="history">
