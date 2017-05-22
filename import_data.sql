@@ -10,7 +10,6 @@ VALUES ("Транспорт"),
        ("Доски и лыжи"),
        ("Крепления"),
        ("Ботинки"),
-       ("Одежда"),
        ("Разное");
 
 
@@ -36,8 +35,7 @@ VALUES (NOW(),
         "Руслан",
         "$2y$10$2OxpEH7narYpkOT1H5cApezuzh10tZEEQ2axgFOaKW.55LxIJBgWW",
         "img/avatar.jpg",
-        "8(925)123-45-67")
-);
+        "8(925)123-45-67");
 
 -- все объявления;
 INSERT INTO lots
@@ -47,7 +45,7 @@ INSERT INTO lots
         image,
         starting_price,
         date_of_completion,
-        bid_rate TINYINT,
+        bid_rate,
         additions_to_favorites,
         user_id,
         category_id)
@@ -62,7 +60,7 @@ VALUES (NOW(),
         "img/lot-1.jpg",
         109999,
         NOW() + INTERVAL 1 DAY,
-        bid_rate 200,
+        200,
         0,
         1,
         8),
@@ -73,7 +71,7 @@ VALUES (NOW(),
         "/img/lot-2.jpg",
         159999,
         NOW() + INTERVAL 2 DAY,
-        bid_rate 200,
+        200,
         0,
         2,
         8),
@@ -84,7 +82,7 @@ VALUES (NOW(),
         "/img/lot-3.jpg",
         8000,
         NOW() + INTERVAL 3 DAY,
-        bid_rate 200,
+        200,
         0,
         3,
         9),
@@ -95,7 +93,7 @@ VALUES (NOW(),
         "/img/lot-4.jpg",
         10999,
         NOW() + INTERVAL 4 DAY,
-        bid_rate 200,
+        200,
         0,
         1,
         10),
@@ -106,10 +104,10 @@ VALUES (NOW(),
         "/img/lot-5.jpg",
         7500,
         NOW() + INTERVAL 5 DAY,
-        bid_rate 200,
+        200,
         0,
         2,
-        11),
+        6),
 
         (NOW(),
         "Описание маски Oakley Canopy",
@@ -117,10 +115,10 @@ VALUES (NOW(),
         "/img/lot-6.jpg",
         5400,
         NOW() + INTERVAL 6 DAY,
-        bid_rate 200,
+        200,
         0,
         3,
-        12);
+        11);
 
 -- ставки для одного из объявлений.
 INSERT INTO costs (date_of_cost,cost,user_id,lot_id)
