@@ -62,7 +62,7 @@
                             foreach ($bets as $key => $bet):
                                 ?>
                                 <tr class="history__item">
-                                    <td class="history__name"><?= $users[$bet[3]-1]["name"];?></td>
+                                    <td class="history__name"><?= $users[$bet[3]-1][3];?></td>
                                     <td class="history__price"><?= ($bet[2]);?></td>
                                     <td class="history__time"><?= timestamp_to_time(($bet[1]));?></td>
                                 </tr>

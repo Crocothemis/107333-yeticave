@@ -27,12 +27,10 @@
                     <img src="img/user.jpg" width="40" height="40" alt="Пользователь">
                 </div>
                 <div class="user-menu__logged">
-                    <p><?=strip_tags($_SESSION['user']['name']); ?></p>
+                    <p><?=strip_tags($_SESSION['user'][3]); ?></p>
                     <a href="logout.php">Выйти</a>
                 </div>
             </nav>
         <?php endif; ?>
-
-
     </div>
 </header>

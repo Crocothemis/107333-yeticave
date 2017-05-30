@@ -21,7 +21,7 @@
             </li>
         </ul>
     </nav>
-    <form class="form form--add-lot container<?= !empty($invalid_fields) ? ' form--invalid' : ''; ?>" action="../add.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
+    <form class="form form--add-lot container<?= !empty($invalid_fields) ? ' form--invalid' : ''; ?>" action="../add-lot.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
         <h2>Добавление лота</h2>
         <div class="form__container-two">
             <div class="form__item <?= array_key_exists( 'title' , $invalid_fields ) ? '  form__item--invalid' : '';  ?>"> <!-- form__item--invalid -->
@@ -33,12 +33,12 @@
                 <label for="category">Категория</label>
                 <select id="category" name="category" >
                     <option>Выберите категорию</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) &&($valid_fields['category'] === 'Доски и лыжи')) ? 'selected' : ''; ?>>Доски и лыжи</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) &&($valid_fields['category'] === 'Крепления')) ? 'selected' : ''; ?>>Крепления</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) &&($valid_fields['category'] === 'Ботинки')) ? 'selected' : ''; ?>>Ботинки</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) &&($valid_fields['category'] === 'Одежда')) ? 'selected' : ''; ?>>Одежда</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) &&($valid_fields['category'] === 'Инструменты')) ? 'selected' : ''; ?>>Инструменты</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) &&($valid_fields['category'] === 'Разное')) ? 'selected' : ''; ?>>Разное</option>
+                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Доски и лыжи')) ? 'selected' : ''; ?>>Доски и лыжи</option>
+                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Крепления')) ? 'selected' : ''; ?>>Крепления</option>
+                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Ботинки')) ? 'selected' : ''; ?>>Ботинки</option>
+                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Одежда')) ? 'selected' : ''; ?>>Одежда</option>
+                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Инструменты')) ? 'selected' : ''; ?>>Инструменты</option>
+                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Разное')) ? 'selected' : ''; ?>>Разное</option>
                 </select>
                 <span class="form__error"><?= array_key_exists( 'category' , $invalid_fields ) ? $invalid_fields['category'] : '';  ?></span>
             </div>

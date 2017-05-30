@@ -1,21 +1,6 @@
 <?php
 require_once 'functions.php';
-require_once 'userdata.php';
-
-function searchUserByEmail($email, $users){
-    $result = null;
-
-    foreach ($users as $user) {
-
-        if ($user['email'] == $email) {
-
-            $result = $user;
-            break;
-
-        }
-    }
-    return $result;
-}
+require_once 'data.php';
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +42,7 @@ if (isset($_POST['login-btn'])) { //если форма была отправл�
 
     if (!empty($invalid_fields)) { //если форма невалидна
 
-        echo  include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+        echo  include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
     } else { // если валидна - залогинить пользователя (проверить что емайл и пароль есть, создать сессию) и перенаправить на главную страницу
         //session_start();
@@ -70,7 +55,7 @@ if (isset($_POST['login-btn'])) { //если форма была отправл�
 
             if ($user = searchUserByEmail($email, $users)) {
 
-                if (password_verify($password, $user['password'])) {
+                if (password_verify($password, $user[4])) {
 
                     echo  $_SESSION['user'] = $user;
 
@@ -80,7 +65,7 @@ if (isset($_POST['login-btn'])) { //если форма была отправл�
 
                     $invalid_fields['password'] = 'Вы ввели неверный пароль';
 
-                    echo  include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+                    echo  include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
                 }
             }
         }
@@ -89,7 +74,7 @@ if (isset($_POST['login-btn'])) { //если форма была отправл�
 
 } else { // если это первая загрузка страницы
 
-    include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+    include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
 }
 
@@ -98,7 +83,7 @@ if (isset($_POST['login-btn'])) { //если форма была отправл�
 
 
 
-<?= include_templates("templates/footer.php", []) ?>
+<?= include_templates("templates/footer.php", ['categories' => $categories]) ?>
 
 
 

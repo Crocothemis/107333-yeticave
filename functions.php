@@ -74,13 +74,11 @@ function get_my_lots() {
     return $cookie_arr;
 }
 
-    $host     = 'localhost';
-    $database = 'yetigave';
-    $user     = 'root';
-    $password = '1111';
-    $connection     = mysqli_connect($host, $user, $password, $database) or die("Error! " . mysqli_error($link));
-
-
+$host     = 'localhost';
+$database = 'yetigave';
+$user     = 'root';
+$password = '1111';
+$connection     = mysqli_connect($host, $user, $password, $database) or die("Error! " . mysqli_error($link));
 
 //1. Функция для получения данных
 function get_data($link, $query, $values = []) {
@@ -94,7 +92,6 @@ function get_data($link, $query, $values = []) {
     return $result;
 }
 
-
 //2. Функция для вставки данных
 function insert_data($link, $query, $values) {
 
@@ -105,7 +102,6 @@ function insert_data($link, $query, $values) {
 
     return $result ? $result : false;
 }
-
 
 //3. Функция для обновления данных.
 function update_data($link, $table_name, $new_data, $conditions) {
@@ -134,8 +130,8 @@ function update_data($link, $table_name, $new_data, $conditions) {
 
         $conditions_sql .= key($value_c)." = ?";
 
-
         if ($key_c < count($new_data) - 1) {
+
             $conditions_sql .= " AND ";
 
         }
@@ -162,6 +158,22 @@ function get_time_remain($time) {
 
     $time_remaining_ts = (strtotime($time) - $now);
     return date("H:i", $time_remaining_ts);
+}
+
+function searchUserByEmail($email, $users){
+    $result = null;
+
+    foreach ($users as $user) {
+
+        if ($user[2] == $email) {
+
+            $result = $user;
+            break;
+        }
+
+    }
+
+    return $result;
 }
 
 ?>
