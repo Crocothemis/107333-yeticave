@@ -50,7 +50,7 @@ require_once 'data.php';
 
                  }
 
-
+                 $new_lot[$key] = $value;
              }
 
              if (isset($_FILES['image'])) {
@@ -61,7 +61,7 @@ require_once 'data.php';
 
                      $valid_fields['image'] = 'img/'  .  $_FILES['image']['name'];
                      move_uploaded_file( $_FILES['image']['tmp_name'], 'img/' . basename($_FILES['image']['name']));
-
+                     $new_lot['image'] = 'img/' . basename($_FILES['image']['name']);
                  } else {
                      $invalid_fields['image'] = 'допускаются форматы png, jpg, gif';
                      $form_valid = false;
@@ -72,7 +72,7 @@ require_once 'data.php';
 
              }
 
-             $new_lot[$key] = $value;
+
 
          }
 
