@@ -1,7 +1,7 @@
 <?php
 
 require_once 'functions.php';
-
+require_once 'data.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -22,6 +22,8 @@ require_once 'functions.php';
 
      if (isset($_POST['submit-btn'])) { //если форма была отправлена
 
+         $new_lot = [];
+         
          foreach ($_POST as $key => $value) {
 
              if ($key !== 'image') {
@@ -47,6 +49,8 @@ require_once 'functions.php';
                      $invalid_fields[$key] = 'категория должна быть выбрана';
 
                  }
+
+                
              }
 
              if (isset($_FILES['image'])) {
@@ -68,20 +72,37 @@ require_once 'functions.php';
 
              }
 
+             $new_lot[$key] = $value;
+
          }
 
          if (!empty($invalid_fields)) { //если форма невалидна
 
-             echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+             echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
-         } else { //показать страницу с новыми данными
+         } else { //показать страницу нового лота
+             
+             $query = "INSERT INTO lots SET date_of_creation= ?, lot_title= ?, description= ?, image= ?, starting_price= ?, date_of_completion= ?, bid_rate= ?, user_id= ?, category_id= ?";
+             $values = [
+                 "date_of_creation" => date('Y-m-d H:i:s'),
+                 "lot_title" => $new_lot["title"],
+                 "description" =>$new_lot["message"],
+                 "image" =>$new_lot["image"],
+                 "starting_price" => $new_lot["price"],
+                 "date_of_completion" => $new_lot["lot-date"],
+                 "bid_rate" => $new_lot["lot-step"],
+                 "user_id" => $_SESSION['user'][0],
+                 "category_id" => $new_lot["category"]
+             ];
 
-             echo  include_templates("templates/lot.php", ['lot' => $valid_fields]);
+             $created_lot = insert_data($connection, $query, $values);
+
+             header("Location: /lot.php?id=".$created_lot);
          }
 
      } else { // если это первая загрузка страницы
 
-         echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+         echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
      }
  } else {

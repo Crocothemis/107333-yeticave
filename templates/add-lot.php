@@ -1,46 +1,29 @@
 <main>
-    <nav class="nav">
-        <ul class="nav__list container">
-            <li class="nav__item">
-                <a href="all-lots.html">Доски и лыжи</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Крепления</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Ботинки</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Одежда</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Инструменты</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Разное</a>
-            </li>
-        </ul>
-    </nav>
+    <?= include_templates("templates/nav.php", ['categories' => $categories]) ?>
     <form class="form form--add-lot container<?= !empty($invalid_fields) ? ' form--invalid' : ''; ?>" action="../add-lot.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
         <h2>Добавление лота</h2>
         <div class="form__container-two">
             <div class="form__item <?= array_key_exists( 'title' , $invalid_fields ) ? '  form__item--invalid' : '';  ?>"> <!-- form__item--invalid -->
                 <label for="title">Наименование</label>
                 <input id="title" type="text" name="title" placeholder="Введите наименование лота" value="<?= array_key_exists( 'title' , $valid_fields ) ? $valid_fields['title']  : '';  ?>">
-                <span class="form__error"> <?= array_key_exists( 'title' , $invalid_fields ) ? $invalid_fields['title'] : '';  ?></span>
+                <span class="form__error"> 
+                    <?= array_key_exists( 'title' , $invalid_fields ) ? $invalid_fields['title'] : '';  ?>
+                    </span>
             </div>
             <div class="form__item <?= array_key_exists( 'category' , $invalid_fields ) ? '  form__item--invalid' : '';  ?>">
                 <label for="category">Категория</label>
                 <select id="category" name="category" >
                     <option>Выберите категорию</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Доски и лыжи')) ? 'selected' : ''; ?>>Доски и лыжи</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Крепления')) ? 'selected' : ''; ?>>Крепления</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Ботинки')) ? 'selected' : ''; ?>>Ботинки</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Одежда')) ? 'selected' : ''; ?>>Одежда</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Инструменты')) ? 'selected' : ''; ?>>Инструменты</option>
-                    <option <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === 'Разное')) ? 'selected' : ''; ?>>Разное</option>
+                    <?php foreach ($categories as $key => $value):?>
+                        <option value="<?=$value[0]?>" 
+                            <?= ((array_key_exists( 'category' , $valid_fields )) && ($valid_fields['category'] === $value[1])) ? 'selected' : ''; ?>>
+                            <?=$value[1]?>
+                        </option>
+                    <?php endforeach;?>
                 </select>
-                <span class="form__error"><?= array_key_exists( 'category' , $invalid_fields ) ? $invalid_fields['category'] : '';  ?></span>
+                <span class="form__error">
+                    <?= array_key_exists( 'category' , $invalid_fields ) ? $invalid_fields['category'] : '';  ?>
+                </span>
             </div>
         </div>
         <div class="form__item form__item--wide <?= array_key_exists( 'message' , $invalid_fields ) ? '  form__item--invalid' : ''; ?>">
@@ -48,7 +31,9 @@
             <textarea id="message" name="message" placeholder="Напишите описание лота" >
                <?php if ( array_key_exists( 'message' , $valid_fields )) {  print $valid_fields['message'];}  ?>
             </textarea>
-            <span class="form__error"><?= array_key_exists( 'message' , $invalid_fields ) ? $invalid_fields['message'] : '';  ?></span>
+            <span class="form__error">
+                <?= array_key_exists( 'message' , $invalid_fields ) ? $invalid_fields['message'] : '';  ?>
+            </span>
         </div>
         <div class="form__item form__item--file <?= array_key_exists( 'image' , $valid_fields) ? ' form__item--uploaded' :
             (array_key_exists('image' , $invalid_fields ) ? '  form__item--invalid' : '' ); ?>"> <!-- form__item--uploaded -->
