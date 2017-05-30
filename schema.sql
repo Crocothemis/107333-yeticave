@@ -15,8 +15,8 @@ CREATE TABLE lots (
   description TEXT,
   image VARCHAR(32),
   starting_price INT,
-  date_of_completion TIMESTAMP,
-  bid_rate TINYINT,
+  daet_of_completion TIMESTAMP,
+  bid_rate INT,
   additions_to_favorites SMALLINT,
   user_id INT,
   winner_id INT,
@@ -40,7 +40,7 @@ CREATE TABLE users (
   date_of_sign_in TIMESTAMP,
   email  VARCHAR(64),
   username  VARCHAR(32),
-  password VARCHAR(32),
+  password VARCHAR(100),
   avatar  VARCHAR(32),
   contacts  VARCHAR(32)
 );

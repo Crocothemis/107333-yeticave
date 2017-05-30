@@ -1,6 +1,6 @@
 
 <footer class="main-footer">
-    <?= include_templates("templates/nav.php", []) ?>
+    <?= include_templates("templates/nav.php", ['categories' => $categories]) ?>
     <div class="main-footer__bottom container">
         <div class="main-footer__copyright">
             <p>© 2017, YetiCave</p>

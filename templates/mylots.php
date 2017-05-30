@@ -1,26 +1,5 @@
 <main>
-    <nav class="nav">
-        <ul class="nav__list container">
-            <li class="nav__item">
-                <a href="all-lots.html">Доски и лыжи</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Крепления</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Ботинки</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Одежда</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Инструменты</a>
-            </li>
-            <li class="nav__item">
-                <a href="all-lots.html">Разное</a>
-            </li>
-        </ul>
-    </nav>
+    <?= include_templates("templates/nav.php", ['categories' => $categories]) ?>
     <section class="rates container">
         <h2>Мои ставки</h2>
         <table class="rates__list">
@@ -31,19 +10,20 @@
                 foreach ($lot_cookie as $key_cookie => $cookie_item) {
 
                     $id = $cookie_item["id"];
-
+                    $key_cookie = $key_cookie - 1;
                     ?>
 
                     <tr class="rates__item">
                         <td class="rates__info">
                             <div class="rates__img">
-                                <img src="<?php print($lots[$key_cookie]["image"]); ?>" width="54" height="40" alt="Сноуборд">
+                                <img src="<?php print($lots[$key_cookie][4]); ?>" width="54" height="40" alt="Сноуборд">
                             </div>
-                            <h3 class="rates__title"><a href="/lot.php?id=<?php print $id; ?>">2014 Rossignol District
-                                    Snowboard</a></h3>
+                            <h3 class="rates__title"><a href="/lot.php?id=<?php print $id; ?>">
+                                    <?php print($lots[$key_cookie][2]); ?>
+                                </a></h3>
                         </td>
                         <td class="rates__category">
-                            <?php print ($lots[$key_cookie]["category"]); ?>
+                            <?php print ($categories[$lots[$key_cookie][11]-1][1]); ?>
                         </td>
                         <td class="rates__timer">
                             <div class="timer timer--finishing">07:13:34</div>

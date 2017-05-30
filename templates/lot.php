@@ -1,37 +1,29 @@
 <main>
-    <?= include_templates("templates/nav.php", []) ?>
+    <?= include_templates("templates/nav.php", ['categories' => $categories]) ?>
     <section class="lot-item container">
-        <h2> <?php print($lot["title"]);?></h2>
+        <h2> <?php print($lot[2]);?></h2>
         <div class="lot-item__content">
             <div class="lot-item__left">
                 <div class="lot-item__image">
-                    <img src="<?php print($lot["image"]);?>" width="730" height="548" alt="Сноуборд">
+                    <img src="<?php print($lot[4]);?>" width="730" height="548" alt="Сноуборд">
                 </div>
-                <p class="lot-item__category">Категория: <span> <?= ($lot["category"]);?></span></p>
+                <p class="lot-item__category">Категория: <span> <?=  $categories[$lot[11]-1][1];?></span></p>
                 <p class="lot-item__description">Легкий маневренный сноуборд, готовый дать жару в любом парке, растопив
-                    снег
-                    мощным щелчкоми четкими дугами. Стекловолокно Bi-Ax, уложенное в двух направлениях, наделяет этот
-                    снаряд
-                    отличной гибкостью и отзывчивостью, а симметричная геометрия в сочетании с классическим прогибом
-                    кэмбер
-                    позволит уверенно держать высокие скорости. А если к концу катального дня сил совсем не останется,
-                    просто
-                    посмотрите на Вашу доску и улыбнитесь, крутая графика от Шона Кливера еще никого не оставляла
-                    равнодушным.</p>
+                    <?= ($lot[3]);?></p>
             </div>
             <div class="lot-item__right">
                 <?php if (isset($_SESSION['user'])): ?>
                     <div class="lot-item__state">
                         <div class="lot-item__timer timer">
-                            10:54:12
+                            <?php print get_time_remain($lot[6]); ?>
                         </div>
                         <div class="lot-item__cost-state">
                             <div class="lot-item__rate">
                                 <span class="lot-item__amount">Текущая цена</span>
-                                <span class="lot-item__cost"><?= ($lot["price"]);?></span>
+                                <span class="lot-item__cost"><?= ($lot[5]);?></span>
                             </div>
                             <div class="lot-item__min-cost">
-                                Мин. ставка <span><?= ($lot["price"]);?></span>
+                                Мин. ставка <span><?= ($lot[5]);?></span>
                             </div>
                         </div>
 
@@ -45,7 +37,7 @@
                             }
                         }
 
-                        if (!(in_array ($lot_id , $all_costs))) {
+                        if (!(in_array ($lot[0] , $all_costs))) {
                         ?>
                         <form class="lot-item__form" action="" method="post">
                             <p class="lot-item__form-item">
@@ -62,17 +54,17 @@
                 <?php endif; ?>
                 <div class="history">
                     <h3>История ставок (<span><?= isset($bets)? count($bets) : "0"; ?></span>)</h3>
-
                     <table class="history__list">
                         <?php
 
                         if (isset($bets)) {
+
                             foreach ($bets as $key => $bet):
                                 ?>
                                 <tr class="history__item">
-                                    <td class="history__name"><?= ($bet["name"]);?></td>
-                                    <td class="history__price"><?= ($bet["price"]);?></td>
-                                    <td class="history__time"><?= timestamp_to_time(($bet["ts"]));?></td>
+                                    <td class="history__name"><?= $users[$bet[3]-1]["name"];?></td>
+                                    <td class="history__price"><?= ($bet[2]);?></td>
+                                    <td class="history__time"><?= timestamp_to_time(($bet[1]));?></td>
                                 </tr>
                                 <?php
                             endforeach;
