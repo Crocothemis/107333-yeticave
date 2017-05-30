@@ -23,7 +23,7 @@ require_once 'data.php';
      if (isset($_POST['submit-btn'])) { //если форма была отправлена
 
          $new_lot = [];
-         
+
          foreach ($_POST as $key => $value) {
 
              if ($key !== 'image') {
@@ -50,7 +50,7 @@ require_once 'data.php';
 
                  }
 
-                
+
              }
 
              if (isset($_FILES['image'])) {
@@ -81,7 +81,7 @@ require_once 'data.php';
              echo  include_templates("templates/add-lot.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
          } else { //показать страницу нового лота
-             
+
              $query = "INSERT INTO lots SET date_of_creation= ?, lot_title= ?, description= ?, image= ?, starting_price= ?, date_of_completion= ?, bid_rate= ?, user_id= ?, category_id= ?";
              $values = [
                  "date_of_creation" => date('Y-m-d H:i:s'),
@@ -123,7 +123,7 @@ require_once 'data.php';
 
 ?>
 
-<?= include_templates("templates/footer.php", []) ?>
+<?= include_templates("templates/footer.php", ['categories' => $categories]) ?>
 
 </body>
 </html>
