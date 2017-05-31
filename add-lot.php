@@ -99,7 +99,7 @@ require_once 'data.php';
 
      } else { // если это первая загрузка страницы
 
-         echo  include_templates('templates/add-lot.php', ['invalid_fields' => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
+         include_templates('templates/add-lot.php', ['invalid_fields' => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
      }
  } else {
