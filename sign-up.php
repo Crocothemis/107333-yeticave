@@ -3,7 +3,6 @@ require_once 'functions.php';
 require_once 'data.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>

@@ -3,4 +3,3 @@ $lots = get_data($connection,'SELECT id, date_of_creation, lot_title, descriptio
 $categories = get_data($connection,'SELECT id, category_name FROM categories ORDER BY id ASC;');
 $bets = get_data($connection,'SELECT id, date_of_cost, cost, user_id, lot_id FROM costs ORDER BY id ASC;');
 $users = get_data($connection,'SELECT id, date_of_sign_in, email, username, password, avatar, contacts FROM users ORDER BY id ASC;');
-?>
