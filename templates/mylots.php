@@ -16,14 +16,14 @@
                     <tr class="rates__item">
                         <td class="rates__info">
                             <div class="rates__img">
-                                <img src="<?php print($lots[$key_cookie][4]); ?>" width="54" height="40" alt="Сноуборд">
+                                <img src="<?php print($lots[$key_cookie]['image']); ?>" width="54" height="40" alt="Сноуборд">
                             </div>
                             <h3 class="rates__title"><a href="/lot.php?id=<?php print $id; ?>">
-                                    <?php print($lots[$key_cookie][2]); ?>
+                                    <?php print($lots[$key_cookie]['lot_title']); ?>
                                 </a></h3>
                         </td>
                         <td class="rates__category">
-                            <?php print ($categories[$lots[$key_cookie][11]-1][1]); ?>
+                            <?php print ($categories[$lots[$key_cookie]['category_id']]['category_name']); ?>
                         </td>
                         <td class="rates__timer">
                             <div class="timer timer--finishing">07:13:34</div>

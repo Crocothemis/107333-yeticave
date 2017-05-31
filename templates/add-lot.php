@@ -69,7 +69,7 @@
             </div>
             <div class="form__item <?= array_key_exists( 'lot-date' , $invalid_fields ) ? '  form__item--invalid' : '';  ?>">
                 <label for="lot-date">Дата завершения</label>
-                <input class="form__input-date" id="lot-date" type="text" name="lot-date" placeholder="20.05.2017"  value="<?= array_key_exists( 'lot-date' , $valid_fields ) ? $valid_fields['lot-date']  : '';  ?>">
+                <input class="form__input-date" id="lot-date" type="text" name="lot-date" placeholder="20.05.2017" value="<?= array_key_exists( 'lot-date' , $valid_fields ) ? $valid_fields['lot-date']  : '';  ?>">
                 <span class="form__error"><?= array_key_exists( 'lot-date' , $invalid_fields ) ? $invalid_fields['lot-date'] : '';  ?></span>
             </div>
         </div>

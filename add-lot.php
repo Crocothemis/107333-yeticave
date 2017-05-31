@@ -73,11 +73,11 @@ require_once 'data.php';
              
          }
 
-         if (!empty($invalid_fields)) { //если форма невалидна
+         if (!empty($invalid_fields)) { 
 
              echo  include_templates('templates/add-lot.php', ['invalid_fields' => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
-         } else { //показать страницу нового лота
+         } else {
 
              $query = 'INSERT INTO lots SET date_of_creation= ?, lot_title= ?, description= ?, image= ?, starting_price= ?, date_of_completion= ?, bid_rate= ?, user_id= ?, category_id= ?';
              $values = [
@@ -88,7 +88,7 @@ require_once 'data.php';
                  'starting_price' => $new_lot['price'],
                  'date_of_completion' => $new_lot['lot-date'],
                  'bid_rate' => $new_lot['lot-step'],
-                 'user_id' => $_SESSION['user'][0],
+                 'user_id' => $_SESSION['user']['id'],
                  'category_id' => $new_lot['category']
              ];
 
@@ -97,7 +97,7 @@ require_once 'data.php';
              header('Location: /lot.php?id='.$created_lot);
          }
 
-     } else { // если это первая загрузка страницы
+     } else { 
 
          include_templates('templates/add-lot.php', ['invalid_fields' => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 

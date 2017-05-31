@@ -87,7 +87,7 @@ function get_data($link, $query, $values = []) {
 
     mysqli_stmt_execute($prepared_stmt);
 
-    $result = mysqli_fetch_all(mysqli_stmt_get_result($prepared_stmt), MYSQLI_NUM);
+    $result = mysqli_fetch_all(mysqli_stmt_get_result($prepared_stmt), MYSQL_ASSOC);
 
     return $result;
 }
@@ -148,14 +148,8 @@ function update_data($link, $table_name, $new_data, $conditions) {
 }
 
 function get_time_remain($time) {
-    // устанавливаем часовой пояс в Московское время
     date_default_timezone_set('Europe/Moscow');
-
-    // временная метка для настоящего времени
     $now = time();
-
-    // далее нужно вычислить оставшееся время до начала следующих суток и записать его в переменную $lot_time_remaining
-
     $time_remaining_ts = (strtotime($time) - $now);
     return date('H:i', $time_remaining_ts);
 }
