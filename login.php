@@ -1,21 +1,6 @@
 <?php
 require_once 'functions.php';
-require_once 'userdata.php';
-
-function searchUserByEmail($email, $users){
-    $result = null;
-
-    foreach ($users as $user) {
-
-        if ($user['email'] == $email) {
-
-            $result = $user;
-            break;
-
-        }
-    }
-    return $result;
-}
+require_once 'data.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +12,14 @@ function searchUserByEmail($email, $users){
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<?= include_templates("templates/header.php", []) ?>
+<?= include_templates('templates/header.php', []) ?>
 
 <?php
 
 $invalid_fields = [];
 $valid_fields = [];
 
-if (isset($_POST['login-btn'])) { //если форма была отправлена
+if (isset($_POST['login-btn'])) {
 
     foreach ($_POST as $key => $value) {
 
@@ -55,12 +40,11 @@ if (isset($_POST['login-btn'])) { //если форма была отправл�
 
     }
 
-    if (!empty($invalid_fields)) { //если форма невалидна
+    if (!empty($invalid_fields)) {
 
-        echo  include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+        echo  include_templates('templates/login.php', ['invalid_fields' => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
-    } else { // если валидна - залогинить пользователя (проверить что емайл и пароль есть, создать сессию) и перенаправить на главную страницу
-        //session_start();
+    } else {
 
         if (!empty($_POST)) {
 
@@ -70,37 +54,30 @@ if (isset($_POST['login-btn'])) { //если форма была отправл�
 
             if ($user = searchUserByEmail($email, $users)) {
 
-                if (password_verify($password, $user['password'])) {
+                if (password_verify($password, $user[4])) {
 
                     echo  $_SESSION['user'] = $user;
 
-                    header("Location: /index.php");
+                    header('Location: /index.php');
 
                 } else {
 
                     $invalid_fields['password'] = 'Вы ввели неверный пароль';
 
-                    echo  include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+                    echo  include_templates('templates/login.php', ['invalid_fields' => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
                 }
             }
         }
 
     }
 
-} else { // если это первая загрузка страницы
+} else {
 
-    include_templates("templates/login.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields]);
+    include_templates('templates/login.php', ['invalid_fields' => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
 
 }
 
 ?>
-
-
-
-
-<?= include_templates("templates/footer.php", []) ?>
-
-
-
+<?= include_templates('templates/footer.php', ['categories' => $categories]) ?>
 </body>
 </html>

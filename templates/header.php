@@ -32,7 +32,5 @@
                 </div>
             </nav>
         <?php endif; ?>
-
-
     </div>
 </header>

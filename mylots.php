@@ -1,9 +1,6 @@
 <?php
-
 require_once 'functions.php';
-require_once 'lots.php';
-
-
+require_once 'data.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -14,12 +11,9 @@ require_once 'lots.php';
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<?= include_templates("templates/header.php", []) ?>
-<?php include_templates("templates/mylots.php",['lots' => $lots]);
+<?= include_templates('templates/header.php', []) ?>
+<?php include_templates('templates/mylots.php',['lots' => $lots, 'categories' => $categories]);
 ?>
-<?= include_templates("templates/footer.php", []) ?>
-
-
-
+<?= include_templates('templates/footer.php', ['categories' => $categories]) ?>
 </body>
 </html>
