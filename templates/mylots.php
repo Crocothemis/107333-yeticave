@@ -1,5 +1,5 @@
 <main>
-    <?= include_templates("templates/nav.php", ['categories' => $categories]) ?>
+    <?= include_templates('templates/nav.php', ['categories' => $categories]) ?>
     <section class="rates container">
         <h2>Мои ставки</h2>
         <table class="rates__list">
@@ -9,7 +9,7 @@
             foreach (get_my_lots() as $key => $lot_cookie) {
                 foreach ($lot_cookie as $key_cookie => $cookie_item) {
 
-                    $id = $cookie_item["id"];
+                    $id = $cookie_item['id'];
                     $key_cookie = $key_cookie - 1;
                     ?>
 
@@ -29,10 +29,10 @@
                             <div class="timer timer--finishing">07:13:34</div>
                         </td>
                         <td class="rates__price">
-                            <?php print ($cookie_item["cost"]) ?>
+                            <?php print ($cookie_item['cost']) ?>
                         </td>
                         <td class="rates__time">
-                            <?= timestamp_to_time($cookie_item["time"]); ?>
+                            <?= timestamp_to_time($cookie_item['time']); ?>
                         </td>
                     </tr>
                     <?php

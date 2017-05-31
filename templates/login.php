@@ -1,10 +1,10 @@
 <main>
-    <?= include_templates("templates/nav.php", ['categories' => $categories]) ?>
+    <?= include_templates('templates/nav.php', ['categories' => $categories]) ?>
 
 
-    <form class="form container<?= !empty($invalid_fields) ? ' form--invalid' : ''; ?>" action="../login.php" method="post"> <!-- form--invalid -->
+    <form class="form container<?= !empty($invalid_fields) ? ' form--invalid' : ''; ?>" action="../login.php" method="post">
         <?php
-        if (isset($_GET["reg"])) {?>
+        if (isset($_GET['reg'])) {?>
             <h2>Теперь вы можете войти, используя свой email и пароль</h2>
         <?php
         } else {
@@ -12,7 +12,7 @@
         <h2>Вход</h2>
         <?php }
         ?>
-        <div class="form__item<?= array_key_exists( 'email' , $invalid_fields ) ? ' form__item--invalid' : '';  ?>"> <!-- form__item--invalid -->
+        <div class="form__item<?= array_key_exists( 'email' , $invalid_fields ) ? ' form__item--invalid' : '';  ?>">
             <label for="email">E-mail*</label>
             <input id="email" type="text" name="email" placeholder="Введите e-mail" value="<?= array_key_exists( 'email' , $valid_fields ) ? $valid_fields['email']  : '';  ?>">
             <span class="form__error">
