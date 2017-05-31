@@ -15,7 +15,7 @@ CREATE TABLE lots (
   description TEXT,
   image VARCHAR(32),
   starting_price INT,
-  daet_of_completion TIMESTAMP,
+  date_of_completion TIMESTAMP,
   bid_rate INT,
   additions_to_favorites SMALLINT,
   user_id INT,

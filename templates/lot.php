@@ -1,5 +1,5 @@
 <main>
-    <?= include_templates("templates/nav.php", ['categories' => $categories]) ?>
+    <?= include_templates('templates/nav.php', ['categories' => $categories]) ?>
     <section class="lot-item container">
         <h2> <?php print($lot[2]);?></h2>
         <div class="lot-item__content">
@@ -7,7 +7,7 @@
                 <div class="lot-item__image">
                     <img src="<?php print($lot[4]);?>" width="730" height="548" alt="Сноуборд">
                 </div>
-                <p class="lot-item__category">Категория: <span> <?=  $categories[$lot[11]-1][1];?></span></p>
+                <p class="lot-item__category">Категория: <span> <?=  $categories[$lot[11]][1];?></span></p>
                 <p class="lot-item__description">Легкий маневренный сноуборд, готовый дать жару в любом парке, растопив
                     <?= ($lot[3]);?></p>
             </div>
@@ -53,7 +53,7 @@
                     </div>
                 <?php endif; ?>
                 <div class="history">
-                    <h3>История ставок (<span><?= isset($bets)? count($bets) : "0"; ?></span>)</h3>
+                    <h3>История ставок (<span><?= isset($bets)? count($bets) : '0'; ?></span>)</h3>
                     <table class="history__list">
                         <?php
 

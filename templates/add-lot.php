@@ -3,7 +3,7 @@
     <form class="form form--add-lot container<?= !empty($invalid_fields) ? ' form--invalid' : ''; ?>" action="../add-lot.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
         <h2>Добавление лота</h2>
         <div class="form__container-two">
-            <div class="form__item <?= array_key_exists( 'title' , $invalid_fields ) ? '  form__item--invalid' : '';  ?>"> <!-- form__item--invalid -->
+            <div class="form__item <?= array_key_exists( 'title' , $invalid_fields ) ? '  form__item--invalid' : '';  ?>">
                 <label for="title">Наименование</label>
                 <input id="title" type="text" name="title" placeholder="Введите наименование лота" value="<?= array_key_exists( 'title' , $valid_fields ) ? $valid_fields['title']  : '';  ?>">
                 <span class="form__error"> 
@@ -26,7 +26,7 @@
                 </span>
             </div>
         </div>
-        <div class="form__item form__item--wide <?= array_key_exists( 'message' , $invalid_fields ) ? '  form__item--invalid' : ''; ?>">
+        <div class="form__item form__item--wide <?= array_key_exists( 'message' , $invalid_fields ) ? ' form__item--invalid' : ''; ?>">
             <label for="message">Описание</label>
             <textarea id="message" name="message" placeholder="Напишите описание лота" >
                <?php if ( array_key_exists( 'message' , $valid_fields )) {  print $valid_fields['message'];}  ?>

@@ -99,7 +99,7 @@ if (isset($_POST['signup-btn'])) { //если форма была отправл
             } else {
 
                 $invalid_fields["email"] = "Такой пользователь уже зарегистрирован";
-                echo include_templates("templates/sign-up.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
+                include_templates("templates/sign-up.php", ["invalid_fields" => $invalid_fields, 'valid_fields' => $valid_fields,'categories' => $categories]);
             }
 
         }

@@ -1,8 +1,8 @@
 <nav class="nav">
     <ul class="nav__list container">
-        <?php foreach ($categories as $key => $value):?>
+        <?php foreach ($categories as $category): ?>
             <li class="nav__item">
-                <a href="all-lots.html"><?=$value[1]?></a>
+                <a href="all-lots.html"><?= $category ?></a>
             </li>
         <?php endforeach;?>
     </ul>
